@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Countdown to Your Birthday 💖</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(to right, #ffecd2, #fcb69f);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #333;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.8);
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 2s ease;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #d63384;
+    }
+
+    .timer {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .unit {
+      text-align: center;
+    }
+
+    .unit span {
+      display: block;
+      font-size: 3rem;
+      color: #333;
+    }
+
+    .message {
+      font-size: 1.2rem;
+      color: #6c757d;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 500px) {
+      .timer {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Counting Down to Your Birthday, My Love 🎂💖</h1>
+    <div class="timer" id="countdown">
+      <div class="unit">
+        <span id="days">00</span>
+        Days
+      </div>
+      <div class="unit">
+        <span id="hours">00</span>
+        Hours
+      </div>
+      <div class="unit">
+        <span id="minutes">00</span>
+        Minutes
+      </div>
+      <div class="unit">
+        <span id="seconds">00</span>
+        Seconds
+      </div>
+    </div>
+    <div class="message">
+      Get ready for your Surprise 🌸
+    </div>
+  </div>
+
+  <script>
+    function updateCountdown() {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      let targetDate = new Date(`June 18, ${currentYear} 00:00:00`);
+
+      // If today's date is past June 18, set countdown for next year
+      if (now > targetDate) {
+        targetDate = new Date(`June 18, ${currentYear + 1} 00:00:00`);
+      }
+
+      const gap = targetDate - now;
+
+      const second = 1000,
+            minute = second * 60,
+            hour = minute * 60,
+            day = hour * 24;
+
+      const days = Math.floor(gap / day);
+      const hours = Math.floor((gap % day) / hour);
+      const minutes = Math.floor((gap % hour) / minute);
+      const seconds = Math.floor((gap % minute) / second);
+
+      document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+      document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+      document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+      document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
